@@ -25,7 +25,9 @@ def split_audio_file(input_file):
     command = [
         "ffmpeg", "-i", input_file, "-f", "segment",
         "-segment_time", str(CHUNK_DURATION_SECONDS),
-        "-c", "copy", os.path.join(TEMP_DIR, "chunk_%03d.wav")
+        "-ar", "16000",  # Ensure sample rate is 16kHz
+        "-ac", "1",       # Ensure mono audio
+        os.path.join(TEMP_DIR, "chunk_%03d.wav")
     ]
     subprocess.run(command, check=True)
     for filename in os.listdir(TEMP_DIR):
@@ -34,13 +36,27 @@ def split_audio_file(input_file):
     return chunk_files
 
 def transcribe_chunk(chunk_path):
+    if os.path.getsize(chunk_path) == 0:
+        print(f"Skipping empty chunk: {chunk_path}")
+        return ""
+
     headers = {"Authorization": f"Bearer {API_KEY}"}
     with open(chunk_path, 'rb') as chunk:
         files = {"file": (chunk_path, chunk, "audio/wav")}
-        data = {"model": "whisper-1"}
-        response = requests.post(API_URL, headers=headers, files=files, data=data, timeout=300)
-        response.raise_for_status()
-        return response.json().get("text", "")
+        data = {
+            "model": "whisper-1",
+            "language": "en"
+        }
+
+        try:
+            response = requests.post(API_URL, headers=headers, files=files, data=data, timeout=300)
+            response.raise_for_status()
+            return response.json().get("text", "")
+        except requests.exceptions.RequestException as e:
+            print(f"Failed to process chunk {chunk_path}: {e}")
+            if response.content:
+                print("Error details:", response.content.decode())
+            return ""
 
 print(f"Starting transcription process in {INPUT_DIR}")
 files_found = False
@@ -56,16 +72,18 @@ for filename in os.listdir(INPUT_DIR):
     files_found = True
     print(f"Processing file: {filename}")
 
-    chunk_files = split_audio_file(file_path)
+    try:
+        chunk_files = split_audio_file(file_path)
+    except subprocess.CalledProcessError as e:
+        print(f"Error during file splitting with ffmpeg for {filename}: {e}")
+        continue
+
     transcription_text = ""
 
     for i, chunk_file in enumerate(chunk_files, start=1):
         print(f"Transcribing chunk {i}/{len(chunk_files)} for file {filename}")
-        try:
-            chunk_text = transcribe_chunk(chunk_file)
-            transcription_text += chunk_text + "\n"
-        except requests.exceptions.RequestException as e:
-            print(f"Failed to process chunk {chunk_file}: {e}")
+        chunk_text = transcribe_chunk(chunk_file)
+        transcription_text += chunk_text + "\n"
 
     output_filename = f"{os.path.splitext(filename)[0]}.txt"
     output_path = os.path.join(OUTPUT_DIR, output_filename)
