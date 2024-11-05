@@ -67,10 +67,7 @@ def call_openai_with_retries(prompt, model="gpt-4o"):
 
 def summarize_text_chunk(text_chunk, file_name):
     prompt = f"""
-    Don't cite your sources
-
-    With the following text, do this:
-    - A detailed summary of the text that is about half as long as the original
+    Give me an incredibly detailed summayr of the above text, as detailed as you can
     """
     logger.info(f"Summarizing text chunk for {file_name}")
     return call_openai_with_retries(prompt + text_chunk)
