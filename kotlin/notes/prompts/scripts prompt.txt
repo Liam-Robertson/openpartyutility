@@ -1,0 +1,126 @@
+OpenPartyUtility/
+├── build.gradle.kts
+├── settings.gradle.kts
+├── gradle.properties
+├── .gitignore
+├── gradlew
+├── gradlew.bat
+├── local.properties
+└── scripts/
+    ├── readTextAndStoreAudio/
+    │   ├── build.gradle.kts
+    │   └── src/
+    │       └── main/
+    │           └── kotlin/
+    │               └── com/
+    │                   └── openparty/
+    │                       └── scripts/
+    │                           └── readTextAndStoreAudio/
+    │                               └── Main.kt
+    ├── uploadDataToFirebase/
+    │   ├── build.gradle.kts
+    │   └── src/
+    │       └── main/
+    │           └── kotlin/
+    │               └── com/
+    │                   └── openparty/
+    │                       └── scripts/
+    │                           └── uploadDataToFirebase/
+    │                               └── Main.kt
+    └── videoAudioToText/
+        ├── build.gradle.kts
+        ├── resources/
+        │   ├── audioVideoInputFiles/
+        │   └── transcribeTextOutput/
+        └── src/
+            └── main/
+                └── kotlin/
+                    └── com/
+                        └── openparty/
+                            └── scripts/
+                                └── videoAudioToText/
+                                    └── Main.kt
+
+---------
+
+build.gradle.kts (project level):
+plugins {
+    kotlin("jvm") version "1.8.0" apply false
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "application")
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+    }
+}
+
+---
+
+build.gradle.kts (readTextAndStoreAudio):
+plugins {
+    kotlin("jvm")
+    application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
+}
+
+application {
+    mainClass.set("com.openparty.scripts.readTextAndStoreAudio.MainKt")
+}
+
+// Run this using: ./gradlew :scripts:readTextAndStoreAudio:run
+
+---
+
+build.gradle.kts (uploadToFirebase):
+plugins {
+    kotlin("jvm")
+    application
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(kotlin("stdlib"))
+}
+
+application {
+    mainClass.set("com.openparty.scripts.uploadDataToFirebase.MainKt")
+}
+
+// Run this using: ./gradlew :scripts:uploadDataToFirebase:run
+
+-----
+This is my kotlin scripts codebase
+
+For any answer you give me, use the cleanest architecture possible.
+
+Whenever you give me code, give me the entire file, don't abbreviate
+
+don't leave comments in the code
+-----
+
+I've given you my kotlin script codebase above. It has different scripts in it to do different utility functions. 
+
+I want to add a script called 

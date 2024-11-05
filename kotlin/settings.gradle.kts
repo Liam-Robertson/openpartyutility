@@ -24,3 +24,4 @@ rootProject.name = "OpenPartyUtility"
 
 include(":scripts:readTextAndStoreAudio")
 include(":scripts:uploadToFirebase")
+include(":scripts:videoAudioToText")
