@@ -462,38 +462,10 @@ Whenever you give me code, give me the entire file, don't abbreviate
 don't leave comments in the code
 -----
 
-when i try to compile gradle i get this error:
+My readTextAndStoreAudio script is currently empty. I want to add a script that does this:
 
-PS C:\Users\liamj\programming\OpenPartyUtility> ./gradlew build --warning-mode=all
-Starting a Gradle Daemon, 1 incompatible and 4 stopped Daemons could not be reused, use --status for details
-Configuring project ':scripts:uploadDataToFirebase' without an existing directory is deprecated. The configured projectDirectory 'C:\Users\liamj\programming\OpenPartyUtility\scripts\uploadDataToFirebase' does not exist, can't be written to or is not a directory. This behavior has been deprecated. This will fail with an error in Gradle 9.0. Make sure the project directory exists and can be written. Consult the upgrading guide for further information: https://docs.gradle.org/8.9/userguide/upgrading_version_8.html#deprecated_missing_project_directory
-<-------------> 0% CONFIGURING [7s]
+- Takes in a text file
+- Uses the openAi api to read that text file using voice
+- Stores the audio for that voice reading
 
-> Configure project :
-e: file:///C:/Users/liamj/programming/OpenPartyUtility/build.gradle.kts:20:9: Unresolved reference: implementation
-
-FAILURE: Build failed with an exception.
-
-* Where:
-Build file 'C:\Users\liamj\programming\OpenPartyUtility\build.gradle.kts' line: 20
-
-* What went wrong:
-Script compilation error:
-
-  Line 20:         implementation(kotlin("stdlib"))
-                   ^ Unresolved reference: implementation
-
-1 error
-
-* Try:
-> Run with --stacktrace option to get the stack trace.
-> Run with --info or --debug option to get more log output.
-> Run with --scan to get full insights.
-> Get more help at https://help.gradle.org.
-
-BUILD FAILED in 9s
-PS C:\Users\liamj\programming\OpenPartyUtility>
-
-
-
-
+Write this functionality for me
