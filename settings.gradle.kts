@@ -19,6 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Open Party Utility"
-include(":app")
- 
+rootProject.name = "OpenPartyUtility"
+
+include(":scripts:readTextAndStoreAudio")
+include(":scripts:uploadDataToFirebase")
