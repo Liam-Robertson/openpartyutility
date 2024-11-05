@@ -14,9 +14,12 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+# The max number of tokens in a context window is 128,000 (i.e. you can give it 128,000 tokens)
+# However the maximum that you can receive in return is only 4,096 tokens
+# For that reason I've set my input tokens at about 8000 tokens so the output will be about half
 MAX_RETRIES = 5
 INITIAL_BACKOFF = 1
-MAX_TOKENS = 120000   # 128,000 max
+MAX_TOKENS = 8000   # 128,000 max
 
 def read_text_file(file_path):
     try:
@@ -67,7 +70,6 @@ def summarize_text_chunk(text_chunk, file_name):
     Don't cite your sources
 
     With the following text, do this:
-    - Give it a title which should be this - {file_name}
     - A detailed summary of the text that is about half as long as the original
     """
     logger.info(f"Summarizing text chunk for {file_name}")

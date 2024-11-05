@@ -18,3 +18,4 @@ local.properties
 
 /python/transcribeVideoAudioToText/resources/
 /python/summariseTextTranscription/resources/
+/python/summariseTextTranscription/storage/
