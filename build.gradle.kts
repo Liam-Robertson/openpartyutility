@@ -1,3 +1,4 @@
+// build.gradle.kts (project level)
 plugins {
     kotlin("jvm") version "1.8.0" apply false
 }
@@ -15,9 +16,4 @@ subprojects {
     repositories {
         mavenCentral()
     }
-
-    dependencies {
-        implementation(kotlin("stdlib"))
-    }
 }
-

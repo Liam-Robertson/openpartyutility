@@ -1,3 +1,4 @@
+// settings.gradle.kts
 pluginManagement {
     repositories {
         google {
@@ -12,7 +13,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
         google()
         mavenCentral()
@@ -22,4 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "OpenPartyUtility"
 
 include(":scripts:readTextAndStoreAudio")
-include(":scripts:uploadDataToFirebase")
+include(":scripts:uploadToFirebase")
