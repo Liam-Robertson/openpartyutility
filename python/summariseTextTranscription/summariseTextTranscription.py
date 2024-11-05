@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 MAX_RETRIES = 5
 INITIAL_BACKOFF = 1
-MAX_TOKENS = 4000  # Adjust to fit within model token limits and desired chunk size
+MAX_TOKENS = 120000   # 128,000 max
 
 def read_text_file(file_path):
     try:
@@ -26,7 +26,7 @@ def read_text_file(file_path):
         logger.error(f"Error reading {file_path}: {e}")
         return None
 
-def chunk_text_by_tokens(text, max_tokens=MAX_TOKENS, model="gpt-4"):
+def chunk_text_by_tokens(text, max_tokens=MAX_TOKENS, model="gpt-4o"):
     tokenizer = tiktoken.encoding_for_model(model)
     tokens = tokenizer.encode(text)
     chunks = []
