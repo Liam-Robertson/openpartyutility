@@ -37,32 +37,6 @@ OpenPartyUtility/
 
 ---------
 
-build.gradle.kts (project level):
-plugins {
-    kotlin("jvm") version "1.8.0" apply false
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
-subprojects {
-    apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "application")
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        implementation(kotlin("stdlib"))
-    }
-}
-
----
-
 This is my scripts codebase
 
 It has both kotlin scrips in it and python scripts in it. I'm only going to ask you to write python scripts so ignore kotlin 
@@ -74,3 +48,20 @@ Whenever you give me code, give me the entire file, don't abbreviate
 don't leave comments in the code
 -----
 
+Write me a new python script using the chatgpt api 
+
+I want to summarise a text file. Use this package structure and put it under the python folder 
+
+    └── summariseTextTranscription/
+        ├── summariseTextTranscription.py
+        └── resources/
+            ├── inputTextTranscriptions/
+            └── outputTextSummary/
+
+The purpose of this script is to take in a text file from inputTextTranscriptions, summarise it using a prompt, then output the summary into outputTextSummary
+
+I want the summary to be about half as long as the input text 
+
+For example, the first task I'm going to give you is to take a 40,000 word text file and summarise it to 20,000 words (i.e. teh output is about half as long as the input) 
+
+Also I'm aware that large files like 40,000 words might break the open ai toke limits. If that's true, then try to chunk the files in a sensible way. However try and chunk them as little as is possible 
